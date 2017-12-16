@@ -17,4 +17,8 @@ public class UserService {
         user.setId(UUID.randomUUID().toString());
         userRepository.save(user);
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
