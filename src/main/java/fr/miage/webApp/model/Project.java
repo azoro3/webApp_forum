@@ -7,8 +7,8 @@ import java.util.Set;
 
 @Entity
 public class Project {
-    @Id
     private String id;
+    @Id
     private String subject;
     private String author;
     @OneToMany
