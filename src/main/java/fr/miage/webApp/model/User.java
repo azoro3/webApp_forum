@@ -2,7 +2,9 @@ package fr.miage.webApp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_entity")
@@ -12,6 +14,8 @@ public class User {
     private String email;
     private String username;
     private String password;
+    @ManyToMany
+    private Set<Role> roles;
 
     public String getId() {
         return id;
@@ -43,5 +47,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

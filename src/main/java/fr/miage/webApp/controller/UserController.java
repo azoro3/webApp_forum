@@ -1,6 +1,7 @@
 package fr.miage.webApp.controller;
 
 import fr.miage.webApp.model.User;
+import fr.miage.webApp.service.SecurityService;
 import fr.miage.webApp.service.UserService;
 import fr.miage.webApp.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private SecurityService securityService;
+
+    @Autowired
     private UserValidator userValidator;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -35,13 +38,22 @@ public class UserController {
             return "registration";
         }
 
-        userService.save(userForm);
+        userService.saveUser(userForm);
+        securityService.autologin(userForm.getUsername(), userForm.getPassword());
 
         return "redirect:/welcome";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
+    public String login(Model model, String error, String logout) {
+        if (error != null) {
+            model.addAttribute("error", "Your username and password is invalid.");
+        }
+
+        if (logout != null) {
+            model.addAttribute("message", "You have been logged out successfully.");
+        }
+
         return "login";
     }
 

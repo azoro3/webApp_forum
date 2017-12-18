@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 4 déc. 2017, 10:15:38
-    Author     : Arthur
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -12,25 +6,27 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <link type="text/css" href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/resources/css/common.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <form name='loginForm' action="<c:url value='/login'/>" method='POST' class="form-signin">
+        <div class="form-group ${error != null ? 'has-error' : ''}">
+            <span>${message}</span>
+            <input name="username" type="text" class="form-control" placeholder="Username"
+                   autofocus="true"/>
+            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <span>${error}</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-<form name='loginForm' action="<c:url value='/login'/>" method='POST'>
-    <table>
-        <tr>
-            <td>Nom:</td>
-            <td><input type='text'
-                       name='username' value=''></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password'
-                       name='password'/></td>
-        </tr>
-        <tr>
-            <td colspan='2'>
-                <input name="submit"
-                       type="submit" value="submit"/>
-            </td>
-        </tr>
-    </table>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+            <h4 class="text-center"><a href="<c:url value='/registration'/>">Creer un compte</a></h4>
+        </div>
+    </form>
+</div>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+</body>
