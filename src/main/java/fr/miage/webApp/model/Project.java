@@ -10,6 +10,7 @@ public class Project {
     @Id
     private String id;
     private String subject;
+    private String author;
     @OneToMany
     private Set<Topic> topics;
 
@@ -35,5 +36,13 @@ public class Project {
 
     public void setTopics(Set<Topic> topics) {
         this.topics = topics;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

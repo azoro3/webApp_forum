@@ -18,6 +18,13 @@
                 <form:errors path="subject"></form:errors>
             </div>
         </spring:bind>
+        <spring:bind path="author">
+            <div>
+                <form:input type="text" path="author" placeholder="author"
+                            autofocus="true"></form:input>
+                <form:errors path="author"></form:errors>
+            </div>
+        </spring:bind>
         <button type="submit">Submit</button>
     </form:form>
 </div>
