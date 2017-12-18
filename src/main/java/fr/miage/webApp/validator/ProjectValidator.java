@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
 @Component
 public class ProjectValidator implements Validator {
     @Autowired
+    private  ProjectService projectService;
+    @Autowired
     private UserService userService;
     private static final String NAME_PROJECT="^([a-zA-Z]*){1}$";
     @Override
@@ -34,6 +36,9 @@ public class ProjectValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"author","not empty");
         if (userService.findByUsername(project.getAuthor()) == null) {
             errors.rejectValue("author", "Invalid.createProjectForm.username");
+        }
+        if (projectService.findBySubject(project.getSubject())!=null){
+            errors.rejectValue("subject","Already.exist.project");
         }
     }
 }

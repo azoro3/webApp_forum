@@ -11,10 +11,21 @@ import java.util.UUID;
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
+
+    /**
+     * method to persist project in database
+     * @param project project to save
+     */
     public void saveProject(Project project) {
         project.setId(UUID.randomUUID().toString());
         projectRepository.save(project);
     }
+
+    /**
+     *
+     * @param subject name of the project to find
+     * @return the subject or null
+     */
     public Project findBySubject (String subject){
         return projectRepository.findBySubject(subject);
     }
