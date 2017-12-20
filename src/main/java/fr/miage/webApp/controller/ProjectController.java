@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+//TODO afficher les messages d'erreur sur la pages.
 @Controller
 public class ProjectController {
     @Autowired
@@ -19,8 +19,14 @@ public class ProjectController {
     private ProjectValidator projectValidator;
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String createProject(Model model) {
+    public String createProject(Model model,String errorSubject,String errorAuthor) {
         model.addAttribute("createProjectForm", new Project());
+        if (errorSubject!=null) {
+            model.addAttribute("errorSubject", "Sujet invalide, doit contenir un seul mot clé");
+        }
+        if(errorAuthor!=null){
+            model.addAttribute("errorAuthor","Pseudo non existant");
+        }
         return "createProject";
 
     }

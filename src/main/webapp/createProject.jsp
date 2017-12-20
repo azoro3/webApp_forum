@@ -7,26 +7,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+    <link type="text/css" href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="/resources/css/common.css" rel="stylesheet">
+</head>
 <body>
 <div>
-    <form:form method="POST" modelAttribute="createProjectForm">
-        <h2>Créer votre projet</h2>
-        <spring:bind path="subject">
-            <div>
-                <form:input type="text" path="subject" placeholder="Subject"
-                            autofocus="true"></form:input>
-                <form:errors path="subject"></form:errors>
-            </div>
-        </spring:bind>
-        <spring:bind path="author">
-            <div>
-                <form:input type="text" path="author" placeholder="author"
-                            autofocus="true"></form:input>
-                <form:errors path="author"></form:errors>
-            </div>
-        </spring:bind>
-        <button type="submit">Submit</button>
-    </form:form>
+    <center><h2>Créer votre projet</h2></center>
+    <form name='createProjectForm' action="<c:url value='/createProject'/>" method='POST' class="form-signin">
+        <div class="form-group">
+            <input name="subject" type="text" class="form-control" placeholder="Subject"
+                   autofocus="true"/>
+            <span>${errorSubject}</span>
+            <input name="author" type="text" class="form-control" placeholder="Author"
+                   autofocus="true"/>
+            <span>${errorAuthor}</span>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le projet</button>
+        </div>
+    </form>
 </div>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
