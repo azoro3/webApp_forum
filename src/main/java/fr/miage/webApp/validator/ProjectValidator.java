@@ -2,6 +2,7 @@ package fr.miage.webApp.validator;
 
 import fr.miage.webApp.model.Project;
 import fr.miage.webApp.service.ProjectService;
+import fr.miage.webApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,7 +16,9 @@ import java.util.regex.Pattern;
 @Component
 public class ProjectValidator implements Validator {
     @Autowired
-    private ProjectService projectService;
+    private  ProjectService projectService;
+    @Autowired
+    private UserService userService;
     private static final String NAME_PROJECT="^([a-zA-Z]*){1}$";
     @Override
     public boolean supports(Class<?> clazz) {
@@ -30,6 +33,12 @@ public class ProjectValidator implements Validator {
         if (!matcher.matches()){
             errors.rejectValue("subject","Invalid.projectForm.subject");
         }
-
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"author","not empty");
+        if (userService.findByUsername(project.getAuthor()) == null) {
+            errors.rejectValue("author", "Invalid.createProjectForm.username");
+        }
+        if (projectService.findBySubject(project.getSubject())!=null){
+            errors.rejectValue("subject","Already.exist.project");
+        }
     }
 }

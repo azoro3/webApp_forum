@@ -9,18 +9,25 @@
 <html>
 <body>
 <div>
-    <form:form method="POST" modelAttribute="createProjectForm">
-        <h2>Créer votre projet</h2>
-        <spring:bind path="subject">
+    <form:form method="POST" modelAttribute="createTopicForm">
+        <h2>Créer votre Topic</h2>
+        <spring:bind path="projectName">
             <div>
-                <form:input type="text" path="subject" placeholder="Subject"
+                <form:input type="text" path="projectName" placeholder="Project Name"
                             autofocus="true"></form:input>
-                <form:errors path="subject"></form:errors>
+                <form:errors path="projectName"></form:errors>
+            </div>
+        </spring:bind>
+        <spring:bind path="title">
+            <div>
+                <form:input type="text" path="title" placeholder="Title"
+                            autofocus="true"></form:input>
+                <form:errors path="title"></form:errors>
             </div>
         </spring:bind>
         <spring:bind path="author">
             <div>
-                <form:input type="text" path="author" placeholder="author"
+                <form:input type="text" path="author" placeholder="Author"
                             autofocus="true"></form:input>
                 <form:errors path="author"></form:errors>
             </div>
