@@ -13,15 +13,15 @@
 </head>
 <body>
 <div>
-    <center><h2>Créer votre projet</h2></center>
+    <center><h2>Créer votre topic</h2></center>
     <form name='createTopicForm' action="<c:url value='/createTopic'/>" method='POST' class="form-signin">
         <div class="form-group">
             <input name="title" type="text" class="form-control" placeholder="Title"
                    autofocus="true"/>
-            <span>${errorSubject}</span>
+            <span>${errorTitre}</span>
             <input name="projectName" type="text" class="form-control" placeholder="Project name"
                    autofocus="true"/>
-            <span>${errorAuthor}</span>
+            <span>${errorProjectName}</span>
             <input name="author" type="text" class="form-control" placeholder="Author"
                    autofocus="true"/>
             <span>${errorAuthor}</span>

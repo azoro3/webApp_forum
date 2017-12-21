@@ -1,6 +1,7 @@
 package fr.miage.webApp.controller;
 
 import fr.miage.webApp.model.Project;
+import fr.miage.webApp.model.Topic;
 import fr.miage.webApp.service.ProjectService;
 import fr.miage.webApp.validator.ProjectValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +20,15 @@ public class ProjectController {
     private ProjectValidator projectValidator;
 
     @RequestMapping(value = "/createProject", method = RequestMethod.GET)
-    public String createProject(Model model,String errorSubject,String errorAuthor) {
+    public String createProject(Model model) {
         model.addAttribute("createProjectForm", new Project());
-        if (errorSubject!=null) {
-            model.addAttribute("errorSubject", "Sujet invalide, doit contenir un seul mot clé");
-        }
-        if(errorAuthor!=null){
-            model.addAttribute("errorAuthor","Pseudo non existant");
-        }
         return "createProject";
 
     }
 
     @RequestMapping(value = "/createProject", method = RequestMethod.POST)
     public String createProject(@ModelAttribute("createProjectForm") Project createProjectForm, BindingResult bindingResult, Model model) {
-        projectValidator.validate(createProjectForm, bindingResult);
+        projectValidator.validate(createProjectForm, bindingResult,model);
         if (bindingResult.hasErrors()) {
             return "createProject";
         }
