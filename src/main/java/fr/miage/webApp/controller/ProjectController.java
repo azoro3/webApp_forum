@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
+
 //TODO afficher les messages d'erreur sur la pages.
 @Controller
 public class ProjectController {
@@ -36,5 +39,10 @@ public class ProjectController {
         return "redirect:/welcome";
     }
 
-
+    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+    public String welcome(Model model) {
+        List<Project> projects = projectService.findAll();
+        model.addAttribute("projects", projects);
+        return "welcome";
+    }
 }

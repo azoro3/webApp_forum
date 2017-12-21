@@ -5,6 +5,7 @@ import fr.miage.webApp.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -28,5 +29,12 @@ public class ProjectService {
      */
     public Project findBySubject (String subject){
         return projectRepository.findBySubject(subject);
+    }
+
+    /**
+     * @return all subject
+     */
+    public List<Project> findAll(){
+        return projectRepository.findAll();
     }
 }

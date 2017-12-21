@@ -21,6 +21,26 @@
         </form>
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
         </h2>
+        <br />
+        <a href="/createProject" class="btn btn-primary" >Create new project</a>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Project</th> <!-- project name -->
+                    <th>Topics</th> <!-- number of topics -->
+                    <th>Author</th> <!-- project author -->
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${projects}" var="project">
+                    <tr>
+                        <td> <a class="btn-block" href="projects/${project.id}"> ${project.subject} </a></td>
+                        <td>${project.topics.size()}</td>
+                        <td>${project.author}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </c:if>
 </div>
 </body>
