@@ -2,25 +2,17 @@ package fr.miage.webApp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
 public class Project {
-    private String id;
     @Id
     private String subject;
     private String author;
-    @OneToMany
+    @OneToMany(mappedBy = "projectName")
     private Set<Topic> topics;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSubject() {
         return subject;

@@ -16,19 +16,19 @@
     <center><h2>Créer votre topic</h2></center>
     <form name='createTopicForm' action="<c:url value='/createTopic'/>" method='POST' class="form-signin">
         <div class="form-group">
-            <input name="title" type="text" class="form-control" placeholder="Title"
-                   autofocus="true"/>
+            <label for="exampleFormControlInput1">Title</label>
+            <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
             <span>${errorTitre}</span>
-            <input name="projectName" type="text" class="form-control" placeholder="Project name"
-                   autofocus="true"/>
-            <span>${errorProjectName}</span>
-            <input name="author" type="text" class="form-control" placeholder="Author"
-                   autofocus="true"/>
-            <span>${errorAuthor}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le projet</button>
         </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Message</label>
+            <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <input name="projectName" type="hidden" value="${project.subject}"/>
+        <input name="author" type="hidden" value="${pageContext.request.userPrincipal.name}"/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le topic</button>
     </form>
 </div>
 </body>

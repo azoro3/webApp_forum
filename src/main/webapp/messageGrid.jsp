@@ -22,25 +22,22 @@
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
         </h2>
         <br />
-        <a href="/createProject" class="btn btn-primary" >Create new project</a>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Project</th> <!-- project name -->
-                    <th>Topics</th> <!-- number of topics -->
-                    <th>Author</th> <!-- project author -->
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${projects}" var="project">
-                    <tr>
-                        <td> <a class="btn-block" href="projects/${project.subject}"> ${project.subject} </a></td>
-                        <td>${project.topics.size()}</td>
-                        <td>${project.author}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+        <div class="card">
+            <div class="card-header">${topic.author}</div>
+            <div class="card-body">
+                <h4 class="card-title">${topic.title}</h4>
+                <p class="card-text">${topic.initialMessage}</p>
+            </div>
+        </div>
+        <c:forEach items="${messages}" var="message">
+            <br />
+            <div class="card">
+                <div class="card-header">${message.author}</div>
+                <div class="card-body">
+                    <p class="card-text">${message.content}</p>
+                </div>
+            </div>
+        </c:forEach>
     </c:if>
 </div>
 </body>

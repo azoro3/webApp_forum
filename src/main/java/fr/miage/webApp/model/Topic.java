@@ -1,8 +1,8 @@
 package fr.miage.webApp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,10 +10,19 @@ public class Topic {
     @Id
     private String id;
     private String title;
+    private String initialMessage;
     private String projectName;
     private String author;
-    @OneToMany
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
+    @OneToMany(mappedBy = "topicId")
     private Set<Message> messages;
+
+    public Topic() {
+        this.messages = new HashSet<>();
+    }
 
     public String getId() {
         return id;
@@ -51,7 +60,19 @@ public class Topic {
         return messages;
     }
 
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public String getInitialMessage() {
+        return initialMessage;
+    }
+
+    public void setInitialMessage(String initialMessage) {
+        this.initialMessage = initialMessage;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

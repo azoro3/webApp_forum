@@ -18,7 +18,6 @@ public class ProjectService {
      * @param project project to save
      */
     public void saveProject(Project project) {
-        project.setId(UUID.randomUUID().toString());
         projectRepository.save(project);
     }
 
