@@ -22,7 +22,7 @@
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
         </h2>
         <br />
-        <a href="/createProject" class="btn btn-primary" >Create new project</a>
+        <!--<a href="/createProject" class="btn btn-primary" >Create new project</a>-->
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -41,6 +41,20 @@
                 </c:forEach>
             </tbody>
         </table>
+        <div>
+            <center><h4>Créer votre projet</h4></center>
+            <form name='createProjectForm' action="" method='POST' class="form-signin">
+                <div class="form-group">
+                    <input name="subject" type="text" class="form-control" placeholder="Subject"
+                           autofocus="true"/>
+                    <span>${errorSubject}</span>
+                </div>
+                <input type="hidden" name="author" value="${pageContext.request.userPrincipal.name}"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le projet</button>
+            </form>
+        </div>
     </c:if>
 </div>
 </body>

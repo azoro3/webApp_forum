@@ -20,14 +20,14 @@ public class ProjectController {
     @Autowired
     private ProjectValidator projectValidator;
 
-    @RequestMapping(value = "/createProject", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/createProject", method = RequestMethod.GET)
     public String createProject(Model model) {
         model.addAttribute("createProjectForm", new Project());
         return "createProject";
 
-    }
+    }*/
 
-    @RequestMapping(value = "/createProject", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/createProject", method = RequestMethod.POST)
     public String createProject(@ModelAttribute("createProjectForm") Project createProjectForm, BindingResult bindingResult, Model model) {
         projectValidator.validate(createProjectForm, bindingResult,model);
         if (bindingResult.hasErrors()) {
@@ -35,7 +35,7 @@ public class ProjectController {
         }
         projectService.saveProject(createProjectForm);
         return "redirect:/welcome";
-    }
+    }*/
 
     @RequestMapping(value = {"/", "/welcome", "/projects"}, method = RequestMethod.GET)
     public String welcome(Model model) {
@@ -54,5 +54,17 @@ public class ProjectController {
         }else{
             return "redirect:/projects";
         }
+    }
+
+    @RequestMapping(value =  {"/", "/welcome", "/projects"}, method = RequestMethod.POST)
+    public String createProject(Model model,
+                                @ModelAttribute("createProjectForm") Project project,
+                                BindingResult bindingResult) {
+        projectValidator.validate(project, bindingResult,model);
+        if (!bindingResult.hasErrors()) {
+            projectService.saveProject(project);
+        }
+
+        return "redirect:/projects";
     }
 }
