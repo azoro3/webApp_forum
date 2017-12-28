@@ -31,8 +31,19 @@ public class UserService implements UserDetailsService {
     public void saveUser(User user) {
         user.setId(UUID.randomUUID().toString());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        user.setRoles(createRoleIfNotFound("ROLE_USER"));
         userRepository.save(user);
+    }
+
+    private Set<Role> createRoleIfNotFound(String name) {
+        Set<Role> roles = new HashSet<>();
+        Role role = roleRepository.findByName(name);
+        if (role == null) {
+            role = new Role(name);
+            roleRepository.save(role);
+        }
+        roles.add(role);
+        return roles;
     }
 
     public User findByUsername(String username) {

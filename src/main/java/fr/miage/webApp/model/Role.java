@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Role {
@@ -13,6 +14,15 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
+
+    public Role() {
+        // Empty for Hibernate
+    }
+
+    public Role(String name) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+    }
 
     public String getId() {
         return id;
