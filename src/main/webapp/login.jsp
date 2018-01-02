@@ -23,10 +23,11 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="<c:url value='/registration'/>">Creer un compte</a></h4>
+            <p class="text-center"><a href="<c:url value='/registration'/>">Creer un compte</a></p>
         </div>
     </form>
 </div>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/popper-1.13.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 </body>

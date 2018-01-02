@@ -1,6 +1,5 @@
 package fr.miage.webApp.controller;
 
-import fr.miage.webApp.model.Project;
 import fr.miage.webApp.model.User;
 import fr.miage.webApp.service.SecurityService;
 import fr.miage.webApp.service.UserService;
@@ -12,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
 
 @Controller
 public class UserController {

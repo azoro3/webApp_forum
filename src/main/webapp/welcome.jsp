@@ -19,26 +19,36 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </h2>
-        <br />
+
+        <div class="user">
+            <span class="align-right">
+                Welcome ${pageContext.request.userPrincipal.name}
+                <br/>
+                <a class="text-primary" onclick="document.forms['logoutForm'].submit()">Logout</a>
+            </span>
+        </div>
+
+        <div class="header">
+            <h2>Forum</h2>
+        </div>
+
         <!--<a href="/createProject" class="btn btn-primary" >Create new project</a>-->
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Project</th> <!-- project name -->
-                    <th>Topics</th> <!-- number of topics -->
-                    <th>Author</th> <!-- project author -->
-                </tr>
+            <tr>
+                <th>Project</th> <!-- project name -->
+                <th>Topics</th> <!-- number of topics -->
+                <th>Author</th> <!-- project author -->
+            </tr>
             </thead>
             <tbody>
-                <c:forEach items="${projects}" var="project">
-                    <tr>
-                        <td> <a class="btn-block" href="projects/${project.subject}"> ${project.subject} </a></td>
-                        <td>${project.topics.size()}</td>
-                        <td>${project.author}</td>
-                    </tr>
-                </c:forEach>
+            <c:forEach items="${projects}" var="project">
+                <tr>
+                    <td><a class="btn-block" href="projects/${project.subject}"> ${project.subject} </a></td>
+                    <td>${project.topics.size()}</td>
+                    <td>${project.author}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
         <div>
@@ -59,5 +69,6 @@
 </div>
 </body>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/popper-1.13.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 </html>

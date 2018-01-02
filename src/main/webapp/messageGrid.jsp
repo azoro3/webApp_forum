@@ -19,9 +19,19 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </h2>
-        <br />
+
+        <div class="user">
+            <span class="align-right">
+                Welcome ${pageContext.request.userPrincipal.name}
+                <br/>
+                <a class="text-primary" onclick="document.forms['logoutForm'].submit()">Logout</a>
+            </span>
+        </div>
+
+        <div class="header">
+            <h2>Messages</h2>
+        </div>
+
         <div class="card">
             <div class="card-header">${topic.author}</div>
             <div class="card-body">
@@ -30,7 +40,7 @@
             </div>
         </div>
         <c:forEach items="${messages}" var="message">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-header">${message.author}</div>
                 <div class="card-body">
@@ -42,5 +52,6 @@
 </div>
 </body>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/popper-1.13.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 </html>

@@ -19,34 +19,45 @@
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </h2>
-        <br />
-        <h3>Project : ${project.subject}</h3>
+
+        <div class="user">
+            <span class="align-right">
+                Welcome ${pageContext.request.userPrincipal.name}
+                <br/>
+                <a class="text-primary" onclick="document.forms['logoutForm'].submit()">Logout</a>
+            </span>
+        </div>
+
+        <div class="header">
+            <h2>Project : ${project.subject}</h2>
+        </div>
+
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Title</th> <!-- topic name -->
-                    <th>Posts</th> <!-- number of posts -->
-                    <th>Author</th> <!-- project author -->
-                </tr>
+            <tr>
+                <th>Title</th> <!-- topic name -->
+                <th>Posts</th> <!-- number of posts -->
+                <th>Author</th> <!-- project author -->
+            </tr>
             </thead>
             <tbody>
-                <c:forEach items="${topics}" var="topic">
-                    <tr>
-                        <td> <a class="btn-block" href="${topic.projectName}/${topic.id}"> ${topic.title} </a></td>
-                        <td>${topic.messages.size()}</td>
-                        <td>${topic.author}</td>
-                    </tr>
-                </c:forEach>
+            <c:forEach items="${topics}" var="topic">
+                <tr>
+                    <td><a class="btn-block" href="${topic.projectName}/${topic.id}"> ${topic.title} </a></td>
+                    <td>${topic.messages.size()}</td>
+                    <td>${topic.author}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
+
         <div>
             <center><h4>Créer votre topic</h4></center>
             <form name='createTopicForm' action="#" method='POST' class="form-signin">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Title</label>
-                    <input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+                    <input name="title" type="text" class="form-control" id="exampleFormControlInput1"
+                           placeholder="Title">
                     <span>${errorTitre}</span>
                 </div>
                 <div class="form-group">
@@ -60,9 +71,11 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le topic</button>
             </form>
         </div>
+
     </c:if>
 </div>
 </body>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/popper-1.13.0.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 </html>

@@ -46,3 +46,17 @@ body {
 .has-error {
     color: red
 }
+
+.header {
+    height: 80px;
+}
+
+.user {
+    display: flex;
+    float: right;
+    padding: 5px;
+}
+
+.align-right {
+    text-align: right;
+}
