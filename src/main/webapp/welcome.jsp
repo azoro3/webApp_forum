@@ -20,13 +20,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <div class="user">
-            <span class="align-right">
-                Welcome ${pageContext.request.userPrincipal.name}
-                <br/>
-                <a class="text-primary" onclick="document.forms['logoutForm'].submit()">Logout</a>
-            </span>
-        </div>
+        <jsp:include page="userHeader.jsp"/>
 
         <div class="header">
             <h2>Forum</h2>
