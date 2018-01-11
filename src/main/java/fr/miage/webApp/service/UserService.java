@@ -46,6 +46,14 @@ public class UserService implements UserDetailsService {
         return roles;
     }
 
+    public void updateUser(String username, User user) {
+        User userModified = userRepository.findByUsername(username);
+        userModified.setUsername(user.getUsername());
+        userModified.setEmail(user.getEmail());
+        userModified.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(userModified);
+    }
+
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
