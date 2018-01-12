@@ -1,11 +1,15 @@
 package fr.miage.webApp.model;
 
+import java.util.List;
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "user_entity")
 public class User {
+
+    @ManyToMany(mappedBy = "followingUsers")
+    private List<Topic> topics;
     @Id
     private String id;
     private String email;
@@ -62,5 +66,11 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+    public void setTopics(List<Topic> topics){
+        this.topics=topics;
+    }
+    public List<Topic> getTopics(){
+        return this.topics;
     }
 }

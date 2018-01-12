@@ -3,6 +3,8 @@ package fr.miage.webApp.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,12 +15,14 @@ public class Topic {
     private String initialMessage;
     private String projectName;
     private String author;
+    @ManyToMany
+    private List<User> followingUsers = new LinkedList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     @OneToMany(mappedBy = "topicId")
-    private Set<Message> messages;
+    private final Set<Message> messages;
 
     public Topic() {
         this.messages = new HashSet<>();
@@ -74,5 +78,11 @@ public class Topic {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+    public void setFollowingUsers(List<User> users){
+        this.followingUsers=users;
+    }
+    public List<User> getFollowingUsers(){
+        return this.followingUsers;
     }
 }
