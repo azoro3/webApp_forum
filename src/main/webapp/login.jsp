@@ -15,15 +15,19 @@
 <div class="container">
     <form name='loginForm' action="<c:url value='/login'/>" method='POST' class="form-signin">
         <div class="form-group ${error != null ? 'has-error' : ''}">
+            <spring:message code="label.user.username" var="username"/>
+            <spring:message code="label.user.password" var="password"/>
             <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
+            <input name="username" type="text" class="form-control" placeholder="${username}"
                    autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="password" type="password" class="form-control" placeholder="${password}"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <p class="text-center"><a href="<c:url value='/registration'/>">Creer un compte</a></p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message
+                    code="button.login"/></button>
+            <p class="text-center"><a href="<c:url value='/registration'/>"><spring:message
+                    code="login.create.account"/></a></p>
         </div>
     </form>
 </div>
