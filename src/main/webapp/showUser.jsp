@@ -13,17 +13,17 @@
 </head>
 <body>
 <div class="container">
-    <h2>User Detail</h2>
-    <br />
+    <h2><spring:message code="homepage.userdetails"/></h2>
+    <br/>
     <span>${message}</span>
 
     <div class="row">
-        <label class="col-sm-2">Name</label>
+        <label class="col-sm-2"><spring:message code="label.user.username"/></label>
         <div class="col-sm-10">${user.username}</div>
     </div>
 
     <div class="row">
-        <label class="col-sm-2">Email</label>
+        <label class="col-sm-2"><spring:message code="label.user.email"/></label>
         <div class="col-sm-10">${user.email}</div>
     </div>
 

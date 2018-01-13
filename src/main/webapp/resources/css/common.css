@@ -48,7 +48,7 @@ body {
 }
 
 .header {
-    height: 80px;
+    height: 90px;
 }
 
 .user {
@@ -59,4 +59,8 @@ body {
 
 .align-right {
     text-align: right;
+}
+
+.align-center {
+    text-align: center;
 }
