@@ -23,7 +23,7 @@
         <jsp:include page="userHeader.jsp"/>
 
         <div class="header">
-            <h2>Forum</h2>
+            <h2><spring:message code="homepage.forum"/></h2>
         </div>
 
         <!--<a href="/createProject" class="btn btn-primary" >Create new project</a>-->
