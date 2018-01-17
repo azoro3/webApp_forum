@@ -16,23 +16,19 @@
 <body>
 <div class="container">
     <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
 
         <jsp:include page="userHeader.jsp"/>
 
         <div class="header">
-            <h2>Forum</h2>
+            <h2><spring:message code="homepage.forum"/></h2>
         </div>
 
-        <!--<a href="/createProject" class="btn btn-primary" >Create new project</a>-->
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Project</th> <!-- project name -->
-                <th>Topics</th> <!-- number of topics -->
-                <th>Author</th> <!-- project author -->
+                <th><spring:message code="homepage.project"/></th> <!-- project name -->
+                <th><spring:message code="homepage.topic"/></th> <!-- number of topics -->
+                <th><spring:message code="homepage.author"/></th> <!-- project author -->
             </tr>
             </thead>
             <tbody>
@@ -46,17 +42,19 @@
             </tbody>
         </table>
         <div>
-            <center><h4>Créer votre projet</h4></center>
             <form name='createProjectForm' action="" method='POST' class="form-signin">
+                <h4 class="form-signin-heading align-center"><spring:message code="homepage.create.project"/></h4>
                 <div class="form-group">
-                    <input name="subject" type="text" class="form-control" placeholder="Subject"
+                    <spring:message code="label.project.subject" var="subject"/>
+                    <input name="subject" type="text" class="form-control" placeholder="${subject}"
                            autofocus="true"/>
                     <span>${errorSubject}</span>
                 </div>
                 <input type="hidden" name="author" value="${pageContext.request.userPrincipal.name}"/>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Créer le projet</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message
+                        code="button.create"/></button>
             </form>
         </div>
     </c:if>
