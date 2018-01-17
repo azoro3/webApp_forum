@@ -39,6 +39,22 @@
                 </div>
             </div>
         </c:forEach>
+
+        <div>
+            <form name='createMessageForm' action="" method='POST' class="form-text">
+                <h4 class="form-signin-heading align-center"><spring:message code="projectpage.create.message"/></h4>
+                <div class="form-group">
+                    <spring:message code="label.topic.message" var="message"/>
+                    <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                              placeholder="${message}"></textarea>
+                </div>
+                <input name="author" type="hidden" value="${pageContext.request.userPrincipal.name}"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit"><spring:message
+                        code="button.create"/></button>
+            </form>
+        </div>
     </c:if>
 </div>
 </body>

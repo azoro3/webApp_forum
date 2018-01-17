@@ -1,31 +1,28 @@
 package fr.miage.webApp.model;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Topic {
     @Id
     private String id;
     private String title;
+    @Column(columnDefinition = "text")
     private String initialMessage;
     private String projectName;
     private String author;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<User> followingUsers = new LinkedList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
-    @OneToMany(mappedBy = "topicId")
-    private final Set<Message> messages;
+    @OneToMany(mappedBy = "topicId", cascade = {CascadeType.ALL})
+    private List<Message> messages;
 
     public Topic() {
-        this.messages = new HashSet<>();
+        this.messages = new ArrayList<>();
     }
 
     public String getId() {
@@ -60,7 +57,7 @@ public class Topic {
         this.author = author;
     }
 
-    public Set<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
@@ -79,10 +76,12 @@ public class Topic {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-    public void setFollowingUsers(List<User> users){
-        this.followingUsers=users;
+
+    public void setFollowingUsers(List<User> users) {
+        this.followingUsers = users;
     }
-    public List<User> getFollowingUsers(){
+
+    public List<User> getFollowingUsers() {
         return this.followingUsers;
     }
 }

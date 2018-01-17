@@ -89,20 +89,56 @@ public class TopicController {
         }
     }
 
+    @RequestMapping(value = "/projects/{projectSubject}/{topicId}", method = RequestMethod.POST)
+    public String postMessage(Model model,
+                              @PathVariable("projectSubject") String projectName,
+                              @PathVariable("topicId") String topicId,
+                              @RequestParam("message") String messageContent,
+                              @RequestParam("author") String authorName) {
+        Topic topic = topicService.findById(topicId);
+        if (topic != null) {
+            Message message = new Message();
+            message.setId(UUID.randomUUID().toString());
+            message.setContent(messageContent);
+            message.setAuthor(authorName);
+            message.setCreationDate(new Date());
+            message.setTopicId(topic.getId());
+
+            topic.getMessages().add(message);
+            topicService.saveTopic(topic);
+
+            List<User> followingUsers = topic.getFollowingUsers();
+            String mailContent = "Nouveau message dans le topic %s : \n %s";
+            for(User follower : followingUsers){
+                System.out.println("follower = " + follower.getEmail());
+                mailSender.send(follower.getEmail(),String.format(mailContent, topic.getTitle(), messageContent),"Nouveau message");
+            }
+
+            model.addAttribute("topic", topic);
+            model.addAttribute("messages", topic.getMessages());
+            return "messageGrid";
+        } else {
+            return "redirect:/projects/" + projectName;
+        }
+    }
+
     @RequestMapping(value = "/projects/{projectSubject}/{topicId}/subscribe", method = RequestMethod.POST)
     public String subscribe(Model model, @PathVariable("topicId") String topic) {
         String u = securityService.findLoggedInUsername();
+        System.out.println("TopicController.subscribe : "+u);
         User currentUser = userService.findByUsername(u);
         Topic currentTopic = topicService.findById(topic);
         model.addAttribute("topic", currentTopic);
+        System.out.println("currentUser : "+currentUser.getUsername());
         if (currentTopic.getFollowingUsers().contains(currentUser)) {
             System.out.println("already subscribed");
         } else {
             currentTopic.getFollowingUsers().add(currentUser);
+            topicService.saveTopic(currentTopic);
             String content = "Bienvenue sur le topic " + currentTopic.getTitle();
             String subject = "abonnement à un topic";
             //TODO faire l'envoi du mail
-            mailSender.send("arthur.rozo@outlook.fr", content, subject);
+            mailSender.send("fakeadresstoto@yopmail.com", content, subject);
         }
         return "redirect:/projects/" + topic;
     }

@@ -8,6 +8,7 @@ public class Message {
     @Id
     private String id;
     private String author;
+    @Column(columnDefinition = "text")
     private String content;
     private String topicId;
 
@@ -36,6 +37,10 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setTopicId(String topicId) {
+        this.topicId = topicId;
     }
 
     public String getTopicId() {
