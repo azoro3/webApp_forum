@@ -4,6 +4,7 @@ import fr.miage.webApp.model.Message;
 import fr.miage.webApp.model.Project;
 import fr.miage.webApp.model.Topic;
 import fr.miage.webApp.model.User;
+import fr.miage.webApp.service.MailSender;
 import fr.miage.webApp.service.ProjectService;
 import fr.miage.webApp.service.SecurityService;
 import fr.miage.webApp.service.TopicService;
@@ -35,6 +36,8 @@ public class TopicController {
     private UserService userService;
     @Autowired
     private SecurityService securityService;
+    @Autowired
+    private MailSender mailSender;
 
     @RequestMapping(value = "/createTopic", method = RequestMethod.GET)
     public String createTopic(Model model) {
@@ -63,10 +66,9 @@ public class TopicController {
             topic.setInitialMessage(messageContent);
             topic.setCreationDate(new Date());
             User u = userService.findByUsername(author);
-            System.out.println(topic.getAuthor());
-            System.out.println(u);
             topic.getFollowingUsers().add(u);
             topicService.saveTopic(topic);
+            mailSender.send(u.getEmail(),"Merci d'avoir créer le topic "+title,"création Topic");
 
             return "topicGrid";
         } else {
@@ -89,10 +91,19 @@ public class TopicController {
 
     @RequestMapping(value = "/projects/{projectSubject}/{topicId}/subscribe", method = RequestMethod.POST)
     public String subscribe(Model model, @PathVariable("topicId") String topic) {
-        User currentUser = userService.findByUsername(securityService.findLoggedInUsername());
+        String u = securityService.findLoggedInUsername();
+        User currentUser = userService.findByUsername(u);
         Topic currentTopic = topicService.findById(topic);
-        model.addAttribute("topic",currentTopic);
-        currentTopic.getFollowingUsers().add(currentUser);
-        return "redirect:/projects/"+topic;
+        model.addAttribute("topic", currentTopic);
+        if (currentTopic.getFollowingUsers().contains(currentUser)) {
+            System.out.println("already subscribed");
+        } else {
+            currentTopic.getFollowingUsers().add(currentUser);
+            String content = "Bienvenue sur le topic " + currentTopic.getTitle();
+            String subject = "abonnement à un topic";
+            //TODO faire l'envoi du mail
+            mailSender.send("arthur.rozo@outlook.fr", content, subject);
+        }
+        return "redirect:/projects/" + topic;
     }
 }
