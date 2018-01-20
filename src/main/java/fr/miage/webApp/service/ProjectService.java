@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProjectService {
@@ -14,26 +13,26 @@ public class ProjectService {
     private ProjectRepository projectRepository;
 
     /**
-     * method to persist project in database
-     * @param project project to save
+     * Method to persist project in database
+     *
+     * @param project Project to save
      */
     public void saveProject(Project project) {
         projectRepository.save(project);
     }
 
     /**
-     *
-     * @param subject name of the project to find
-     * @return the subject or null
+     * @param subject Name of the project to find
+     * @return The subject or null
      */
-    public Project findBySubject (String subject){
+    public Project findBySubject(String subject) {
         return projectRepository.findBySubject(subject);
     }
 
     /**
-     * @return all subject
+     * @return All subject
      */
-    public List<Project> findAll(){
+    public List<Project> findAll() {
         return projectRepository.findAll();
     }
 }

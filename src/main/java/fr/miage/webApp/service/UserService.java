@@ -28,6 +28,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Method to save an user in database
+     *
+     * @param user User to save
+     */
     public void saveUser(User user) {
         user.setId(UUID.randomUUID().toString());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -35,6 +40,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    /**
+     * Method to add a role to an user
+     *
+     * @param name Name of the role
+     * @return A set of roles
+     */
     private Set<Role> createRoleIfNotFound(String name) {
         Set<Role> roles = new HashSet<>();
         Role role = roleRepository.findByName(name);
@@ -46,18 +57,22 @@ public class UserService implements UserDetailsService {
         return roles;
     }
 
-    public void updateUser(String username, User user) {
-        User userModified = userRepository.findByUsername(username);
-        userModified.setUsername(user.getUsername());
-        userModified.setEmail(user.getEmail());
-        userModified.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(userModified);
-    }
-
+    /**
+     * Find an user by his username
+     *
+     * @param username Username of the user to find
+     * @return User
+     */
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Find an user by his email
+     *
+     * @param email Email of the user to find
+     * @return User
+     */
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
